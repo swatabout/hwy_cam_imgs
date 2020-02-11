@@ -17,7 +17,7 @@ def predict():
     logging.info('Get filelist'l)
     
     logging.info('Getting predicted counts from images')
-    counts, boxes = detect_objects(detector, filelist)
+    counts= detect_objects(Image_Name)
     logging.error('Issue with counting objects in images')
 
     return '''%s /n
