@@ -249,13 +249,7 @@ def tx_scrape():
 ​
 ​
 # tx = tx_scrape()
-​
-​
-#aws credintials
-# Username = 'FW-bucket-user'
-# Access_key_ID = 'AKIAI675MCFO5KZMA7CQ'
-# Secret_Access_Key = '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'
-# print('AWS credentials saved')
+
 ​
 ​
 # Start s3 session
