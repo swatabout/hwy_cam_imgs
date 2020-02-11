@@ -1,4 +1,5 @@
 from imageai.Detection import ObjectDetection
+from functions import get_images
 import os, numpy as np
 import pandas as pd
 
@@ -34,7 +35,7 @@ def detect_object(image):
 
     try:
          # convert list of objects to dataframe
-        df = pd.DataFrame.from_records(boxes, columns = ['Object', 'Image_Name', 'Probability', 'box_ppoints']) # with probablities
+        df = pd.DataFrame.from_records(boxes, columns = ['Object', 'Image_Name', 'Probability', 'box_points']) # with probablities
         df_count = df['Object', 'Image_name'] # without probablities
     
     except:
