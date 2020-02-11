@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 #from flask_sqlalchemy import SQLAlchemy
 from Jills_RetinaNet import setup_detector, pull_con, detect_objects, pushtosql
 import logging
-import config as cfg
 
 app = Flask(__name__)
 
