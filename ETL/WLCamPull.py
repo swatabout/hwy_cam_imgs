@@ -11,16 +11,8 @@ import sys
 import numpy as np
 
 #SQL and WL API credentials
-Server = "freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com"
-Database = "Warehouse"
-UID = "sierra_watkins"
-PWD = "5Kj5iwMuh#6I^*DH"
-headers = {"x-api-key": "DRp7ANyqZG3HevdumnZ4X1h5Yd6FTKHL9tFxc3GE"}
-params = {"retType": "bbox"}
 
 #sql connection, query and df
-engine = sql.create_engine(f'mssql+pymssql://sierra_watkins:5Kj5iwMuh#6I^*DH@freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com/Warehouse')
-engine.connect()
 query =engine.execute('''SELECT [left], [right], [top], [bottom] FROM warehouse.dbo.geo_us_grid''')
 table = pd.DataFrame(query.fetchall(), columns=query.keys())
 
