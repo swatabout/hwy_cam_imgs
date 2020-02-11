@@ -1,19 +1,7 @@
-?
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 27 11:27:56 2019
-
-@author: Sierra Watkings
-"""
-
 from PIL import Image
-import os.path
-import io
+import os.path, io, scipy 
 import numpy as np
 import matplotlib.pyplot as plt
-import pymongo 
-import scipy
-import json
 
 def threshold(histogram, bins, height, distance):
     peaks, _ = scipy.signal.find_peaks(hist, height = height, distance=distance)
@@ -34,7 +22,7 @@ def calculate_brightness(image):
     
 bright = []
 if __name__ == '__main__':
-    path = "C:/Users/Sierra Watkings/Documents/Repos/proj-SWATKINS-HWY_Camera_Classification/notebooks/"
+    path = "/path/to/image"
     
     for f in os.listdir(path):
         for i in range(45): # true 24hr window 45 images for this 
