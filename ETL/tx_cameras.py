@@ -1,44 +1,22 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jul 29 14:20:55 2019
-
-@author: Joey-Ward
-"""
-
-
 from bs4 import BeautifulSoup
 from multiprocessing import Pool
-import boto3
-import boto.s3.connection
-import requests
-import csv
-import sqlalchemy as sql
-import pandas as pd
-import re
-import lxml
+import boto.s3.connection, requests, csv, re, lxml, io, base64, os, time
+import sqlalchemy as sql, pandas as pd
 from datetime import datetime
-import io
-import base64
-import os
-import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-​
-​
-​
+
 #Download selenium chromedriver
-#Set an environment variable for it. (Call it whatever you want)
-​
-​
+#Set an environment variable for it
+
 def tx_scrape():
     start = time.time()
     df =pd.DataFrame()
     cameras = pd.DataFrame()
-​
-​
+
     # get content
     options = webdriver.ChromeOptions() 
     options.add_argument("start-maximized")
@@ -53,8 +31,7 @@ def tx_scrape():
     soup = BeautifulSoup(page, 'lxml')
     driver.quit()
     temp = pd.DataFrame()
-​
-​
+
     #Create List that will allow us to iterate to the next url
     for i in soup.find_all('option'):
         temp = temp.append({ 'value': i.get('value'), 'city': i.contents}, ignore_index=True)
@@ -64,8 +41,7 @@ def tx_scrape():
     value = temp['value'].values.tolist()
     city[-1:] = ['Yoakum Area']
     print(city)
-​
-​
+
     #Grab each subset of images in the url, and then close that url
     for i in range(len(city)):
         ci = city[i]
@@ -145,13 +121,13 @@ def tx_scrape():
                                 page = driver.page_source
                                 soup =BeautifulSoup(page, 'lxml')
                                 print('new soup')
-​
+
                             else:
                                 x = False
                                 count+=2
                                 print('success')
                                 break
-​
+                        
                     elif count == 1:
                         for v in soup.find_all('img', {'class' : 'divImg'}):
                             e = soup.find_all('img', {'class' : 'divImg'})
@@ -241,47 +217,13 @@ def tx_scrape():
     #     img_bytes = io.BytesIO(r.content)
     #     img_obj = s3.Object(bucketname, img_name)
     #     img_obj.put(Body=img_bytes)
-​
+    
     cameras.drop(columns, axis = 1, inplace = True)
     texas = cameras.values.tolist()
     print('Cameras df is created')
     return texas
-​
-​
-# tx = tx_scrape()
 
-​
-​
-# Start s3 session
-​
-# session = boto3.Session(Access_key_ID, Secret_Access_Key)
-# print('boto3 session created') 
-# s3 = session.resource('s3')
-# print('S3 variable created')
-# bucketname='statictrafficcameras'
-# print('Bucket name provided')
-​
-def get_imgs(value):
-    url = value[0]
-    uuid = value[3]
-    state= value[4]
-    if url == 'http://its.txdot.gov/ITS_WEB/FrontEnd/snapshots/NoSnapshot.png' or url == 'http://its.txdot.gov/ITS_WEB/FrontEnd/snapshots/LoadingSnapshot.png':
-        return None
-    else:
-        # try:
-        today = datetime.now().strftime("%Y-%m-%d_%Hh:%Mm")
-        img_name = f'{uuid}_{today}.png'
-        # r=requests.get(i['Image_URL'], stream=True)
-        # if r.status_code==200:
-        img_bytes = io.BytesIO(base64.decodebytes(b'%s') % url)
-        img_obj = s3.Object(bucketname, f'{state}/'+img_name)
-        img_obj.put(Body=img_bytes)
-        print(f"{uuid} finished.")
-        # except:
-        #     print("URL: \n %s is rejecting request..." % uuid)
-        #     return None
-​
-​
+
 tx = tx_scrape()
 if __name__ == '__main__':
     start = time.time()
