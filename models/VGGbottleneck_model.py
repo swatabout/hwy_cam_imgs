@@ -19,11 +19,6 @@ os.mkdir(os.path.join(os.getcwd(), 'train'))
 os.mkdir(os.path.join(os.getcwd(), 'validation'))
 os.chdir('/tensorflow/models/research/object_detection/camdata')
 
-Server = "freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com"
-Database = "Warehouse"
-PWD = 'sierra_watkins'
-UID = '5Kj5iwMuh#6I^*DH'
-
 engine = sql.create_engine(f"mssql+pymssql://{PWD}:{UID}@{Server}/{Database}")
 con = engine.connect()
 
