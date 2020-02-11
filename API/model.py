@@ -1,7 +1,7 @@
 from imageai.Detection import ObjectDetection
 import os, numpy as np, pandas as pd
 
-def detect_object(image):
+def detect_object(filelist):
 
     try:
         # set path to find model
@@ -13,21 +13,21 @@ def detect_object(image):
 
     except:
         logging.error('Transfer model failed to load')
-
+    
+    boxes = []
+    for image in len(filelist):
         # bounding boxes in images
     try:
         boxes = []
         custom_objects = detector.CustomObjects(car=True, truck=True)
         detections = detector.detectCustomObjectsFromImage(input_image = image,
-                                                      output_image_path = os.getcwd(),
+                                                      output_image_path = '%s_new.png' % filelist[image],
                                                       custom_objects = custom_objects, minimum_percentage_probability=20) 
         logging.error("Couldn't put in bounding boxes on custom objects")
 
     try:
         for eachObject in detections:
-            boxes.append(eachObject["name"], image)
-
-            Image(image) #show image in api
+            boxes.append((eachObject["name"], filelist[image]))
     except:
         logging.error("No boxes to be found in detection")
 
