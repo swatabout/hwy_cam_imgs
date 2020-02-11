@@ -13,16 +13,6 @@ import psutil
 #pd.options.display.max_columns = 999
 #pd.options.display.max_rows = 999
 
-Server = "freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com"
-Database = "Warehouse"
-PWD = '5Kj5iwMuh#6I^*DH'
-UID = 'sierra_watkins'
-
-#aws credintials
-Username = 'FW-bucket-user'
-Access_key_ID = 'AKIAI675MCFO5KZMA7CQ'
-Secret_Access_Key = '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'
-
 # Connect to SQL
 # conn = pyodbc.connect(f'Driver=ODBC Driver 17 for SQL Server; Server={Server};Database={Database}; uid=fwdbmain; pwd=7AC?Ls9_z3W#@XrR')
 engine = sql.create_engine(f'mssql+pymssql://{UID}:{PWD}@{Server}/{Database}')
