@@ -1,7 +1,5 @@
 from imageai.Detection import ObjectDetection
-from functions import get_images
-import os, numpy as np
-import pandas as pd
+import os, numpy as np, pandas as pd
 
 def detect_object(image):
 
