@@ -16,11 +16,6 @@ os.mkdir(os.path.join(path, 'train')
 os.mkdir(os.path.join(path, 'validation')
 os.mkdir(os.path.join(path, 'test')
 
-Server = "freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com"
-Database = "Warehouse"
-PWD = 'sierra_watkins'
-UID = '5Kj5iwMuh#6I^*DH'
-
 engine = sql.create_engine(f"mssql+pymssql://{PWD}:{UID}@{Server}/{Database}")
 con = engine.connect()
 
