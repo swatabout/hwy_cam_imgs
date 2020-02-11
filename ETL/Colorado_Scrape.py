@@ -1,32 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 from bs4 import BeautifulSoup
-import requests
 from fnmatch import fnmatch, filter as fnfilter
-import csv
-import sqlalchemy as sql
+import csv, re, lxml, datetime, io, os, time, requests
+import sqlalchemy as sql, pandas as pd
 import pandas as pd
-import re
-import lxml
-import datetime
-import io
-import os
-import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 #Download selenium chromedriver
-#Set an environment variable for it. (Call it whatever you want)
-
-
-# In[ ]:
-
+#Set an environment variable for it
 
 start = time.time()
 options = webdriver.ChromeOptions() 
@@ -151,12 +134,9 @@ colorado = pd.DataFrame(
 colorado['state'] = 'CO'
 colorado['UUID'] = range(1000000, 1000000 + len(colorado)) 
 colorado['UUID'] = colorado['State'] + colorado['UUID'].astype(str)
-colorado.to_csv(r'C:\Users\Willie Spight\Desktop\Colorado_Traffic_Cameras_1.csv', index = None, header=True)
+colorado.to_csv(r'/path/to/Colorado_Traffic_Cameras_1.csv', index = None, header=True)
 end = time.time()
-print(f'{(end - start)/60} minutes of my li9fe goonge')
-
-
-# In[ ]:
+print(f'{(end - start)/60} minutes of my life goone')
 
 
 
