@@ -1,3 +1,5 @@
+# Pull snapshots from urls and store images in s3 bucket
+
 import requests, numpy, boto3, io, psutil
 from multiprocessing import Pool
 from datetime import datetime
