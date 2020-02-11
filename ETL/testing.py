@@ -1,28 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  9 16:26:06 2019
-
-@author: Joey-Ward
-"""
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  9 10:27:36 2019
-
-@author: Joey-Ward
-"""
-
-import os
-import sys
+import os, sys, requests, json, time, glob
 import pandas as pd
-import requests
-import json
-import time
-import glob
-import datetime
-from datetime import datetime
-from datetime import date
+from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
-from datetime import datetime
 from pandas.io.common import ParserError#, FileNotFoundError
 from multiprocessing import Pool
 
