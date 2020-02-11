@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 #from flask_sqlalchemy import SQLAlchemy
-from Jills_RetinaNet import setup_detector, pull_con, detect_objects, pushtosql
+from list_files import list_files
+from model import setup_detector, detect_objects
 import logging
 
 app = Flask(__name__)
