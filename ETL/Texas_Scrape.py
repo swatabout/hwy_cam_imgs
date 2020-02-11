@@ -1,65 +1,17 @@
-#!/usr/bin/env python
-# coding: utf-8
-#end()
-#print(f'{end()-start()/60} minutes to complete process.')
-
 from bs4 import BeautifulSoup
 from multiprocessing import Pool
 from multiprocessing import Process
-import boto3
-import boto.s3.connection
-import requests
-import csv
-import sqlalchemy as sql
-import pandas as pd
-import re
-import lxml
+import requests, csv, re, lxml, io, os, time, base64
+import sqlalchemy as sql, pandas as pd
 from datetime import datetime
-import io
-import base64
-import os
-import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 
-
-
 #Download selenium chromedriver
-#Set an environment variable for it. (Call it whatever you want)
-
-def get_imgs(value):
-    url = []
-    url.append(value[0])
-    uuid = [] 
-    uuid.append(value[3])
-    state = []
-    state.append(value[4])
-    Username = 'FW-bucket-user'
-    Access_key_ID = 'AKIAI675MCFO5KZMA7CQ'
-    Secret_Access_Key = '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'
-    session = boto3.Session(Access_key_ID, Secret_Access_Key)
-    s3 = session.resource('s3')
-    bucketname='statictrafficcameras'
-    # print(url)
-    # print(uuid)
-    # print(state)
-    if url[0] == 'http://its.txdot.gov/ITS_WEB/FrontEnd/snapshots/NoSnapshot.png' or url[0] == 'http://its.txdot.gov/ITS_WEB/FrontEnd/snapshots/LoadingSnapshot.png':
-        print("bad camera image")
-        return None
-    else:
-        today = datetime.now().strftime("%Y-%m-%d_%Hh:%Mm")
-        img_name = f'{uuid[0]}_{today}.png'
-        img_decoded= bytes(url[0], 'utf-8')
-        # print(img_decoded)
-        nextthing = base64.decodebytes(img_decoded)
-        img_bytes = io.BytesIO(nextthing)
-        img_obj = s3.Object(bucketname, 'TX/'+img_name)
-        img_obj.put(Body=img_bytes)
-        print(f'{uuid[0]} finished')
-
+#Set an environment variable for it
 
 def tx_scrape():
     start = time.time()
