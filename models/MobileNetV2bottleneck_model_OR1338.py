@@ -14,10 +14,6 @@ import pyodbc
 from sklearn.model_selection import train_test_split
 
 
-Server = "freightwaves.ctaqnedkuefm.us-east-2.rds.amazonaws.com"
-Database = "Warehouse"
-PWD = 'sierra_watkins'
-UID = '5Kj5iwMuh#6I^*DH'
 
 engine = sql.create_engine("mssql+pyodbc://{PWD}:{UID}@{Server}/{Database}")
 con = engine.connect()
